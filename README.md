@@ -1,8 +1,9 @@
-### xlsxvo ([English Document](./docs/doc_en.md))
-> 把excel转成代码可阅读的vo类型
-> 自动生成各种开发语言自定义的静态文件
+### xlsxvo ([English Document](./README_EN.md))
+* 把excel转成代码可阅读的vo类型
+* 自动生成各种开发语言自定义的静态文件
 
 ### 更新日志
+* v0.1.0
 
 ### 使用说明
 * 目前只支持.xlsx格式，不支持.xls格式。
@@ -17,7 +18,8 @@ cd xlsxvo
 npm install
 ```
 
-```json
+### 配置说明
+```javascript
 {
     "xlsx": {
         /** 定义属性的行 */
