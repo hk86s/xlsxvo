@@ -1,0 +1,8 @@
+{
+    "proto2ts": {
+        "protoPath": "E:/Dangergold/doc2client/proto",
+        "layaPath": "./proto-bin/protocol.proto",
+        "tsTemplate": "./devtool/ProtoUtils.templ",
+        "tsPath": "./proto-bin/ProtoUtils.ts"
+    }
+}

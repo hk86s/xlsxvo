@@ -1,0 +1,46 @@
+#<TS>
+module net.protovos {
+
+	/**  */
+    export var creator: any;
+    
+    export function build(name: string, data?: any): any {
+        var factory: any = creator.lookup(name);
+        if (data instanceof ArrayBuffer) {
+            return factory.decode(new Uint8Array(data));
+        }
+        if (data instanceof Uint8Array) {
+            return factory.decode(data);
+        }
+        return factory.create(data);
+    }
+
+${PROTO_CONST}
+
+${PROTO_FUNC}
+
+${PROTO_INTERFACE}
+
+}
+#END
+
+#<PROTO_CONST>
+    export const ${PROTOVO_NAME}_NAME: string = "${PROTOVO_NAME}";
+#END
+
+#<PROTO_FUNC>
+    export function carte${PROTOVO_NAME}(data?: any): ${PROTOVO_NAME} {
+        return build(${PROTOVO_NAME}_NAME, data);
+    }
+#END
+
+#<PROTO_INTERFACE>
+    export interface ${PROTOVO_NAME} {
+        ${PROTO_PARAM}
+    }
+#END
+
+#<PROTO_PARAM>
+        /** ${HELP} */
+        ${PARAM_NAME}: ${PARAM_TYPE};
+#END
