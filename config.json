@@ -1,21 +1,21 @@
 {
     "xlsx": {
-        "title": 2,
-        "note": 3,
-        "path": "./Demo.xlsx"
-    },
-    "json": {
-        "uglify": false,
-        "path": "./Demo.json"
+        "title": 1,
+        "path": "./Demo.xlsx",
+        "start": 3
     },
     "lang": [
         {
-            "define": 1,
+            "define": 2,
             "template": "./ts.templ",
             "merge": false,
             "path": "./ts"
         }
     ],
+    "json": {
+        "uglify": false,
+        "path": "./Demo.json"
+    },
     "protobuf": {
         "define": 1,
         "syntax": 3,

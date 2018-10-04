@@ -22,18 +22,12 @@ npm install
 ```javascript
 {
     "xlsx": {
-        /** 定义属性的行 */
-        "title": 2,
-        /** 定义属性的行 */
-        "note": 3,
+        /** 该行为属性名，代码中则为注释 */
+        "title": 1,
         /** xlsx文件路径 */
         "path": "./Demo.xlsx",
-    },
-    "json": {
-        /** 是否压缩JSON */
-        "uglify": false,
-        /** 导出的JSON文件的路径 */
-        "path": "./Demo.json"
+        /** xlsx数据起始行 */
+        "start": 3
     },
     /**
     * 导出类文件，用于不同开发语言直接读取数据作为常量或初始变量使用
@@ -42,7 +36,7 @@ npm install
     "lang": [
         {
             /** 表示为该语言定义的变量类型所在行号 */
-            "define": 1,
+            "define": 2,
             /** 表示为生成该语言的文件模板，系统将自动替换模板内的占位符为实际类名或变量名 */
             "template": "./ts.templ",
             /** true表示把所有类合并到同一个文件中，否则将以类名分别命名 */
@@ -51,6 +45,12 @@ npm install
             "path": "./ts"
         }
     ],
+    "json": {
+        /** 是否压缩JSON */
+        "uglify": false,
+        /** 导出的JSON文件的路径 */
+        "path": "./Demo.json"
+    },
     /** 将excel直接导出成protobuf流文件 */
     "protobuf": {
         /** 表示为该语言定义的变量类型所在行号 */
