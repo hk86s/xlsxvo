@@ -5,7 +5,9 @@ var langTypes = [];
 for (let i = 0; i < files.length; ++i) {
     let file = files[i];
     if (file.name.charAt(0) != '!') {
-        langTypes.push(new LangType(file.data, conf.lang[i].define - 1, conf.xlsx.title - 1));
+        let typ = new LangType(file.data, conf.lang[i].define - 1, conf.xlsx.title - 1);
+        typ.buildLangFile();
+        langTypes.push(typ);
     }
 }
 if (conf.json) {
@@ -46,7 +48,8 @@ function LangType(data, defineLine, titleLine) {
     this.defineKey = [''];
     this.defineType = [''];
     this.keyIndex = -1;
-    for (let j = 0; j < data[defineLine].length; ++j) {
+    this.numKeys = data[defineLine].length;
+    for (let j = 0; j < this.numKeys; ++j) {
         let defineStr = data[defineLine][j];
         let arr = defineStr.split(':');
         this.defineKey[j] = arr[0];
@@ -58,6 +61,26 @@ function LangType(data, defineLine, titleLine) {
         this.title[j] = data[titleLine][j];
     }
     this.data = data;
+
+    /**
+     * 根据指定语言模板，创建目标语言可用的文件
+     * @param {string} templStr 模板
+     * @param {string} name 文件名
+     */
+    this.buildLangFile = (templStr, name) => {
+        let fileStr = templStr.sub('#<PROTO_INTERFACE>', '#END');
+        let paramStr = templStr.sub('#<PROTO_PARAM>', '#END');
+        fileStr = fileStr.replace('${PROTOVO_NAME}', name);
+        for (let i = this.numKeys - 1; i >= 0; --i) {
+            fileStr = fileStr.replace('${PROTO_PARAM}',
+                '${PROTO_PARAM}' + '\r' + paramStr
+                    .replace('${PARAM_NAME}', this.defineKey[i])
+                    .replace('${PARAM_TYPE}', this.defineType[i])
+                    .replace('${HELP}', this.title[i])
+            );
+        }
+        return fileStr.replace('${PROTO_PARAM}', '');
+    }
 }
 
 /**
